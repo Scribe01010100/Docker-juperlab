@@ -1,18 +1,19 @@
-# Use the latest Ubuntu image
-FROM ubuntu:latest
+# Use a specific version of Ubuntu image for stability
+FROM ubuntu:22.04
 
 # Update and install required packages
 RUN apt-get update && apt-get install -y \
     python3 \
-    python3-pip
+    python3-pip && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /app
 
-# Install Jupyter Lab
+# Install JupyterLab
 RUN pip3 install jupyterlab
 
-# Expose port 8080
+# Expose port 8080 for JupyterLab
 EXPOSE 8080
 
 # Start JupyterLab on port 8080 without authentication
